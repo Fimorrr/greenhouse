@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="monitoring">
+
+    <table class="monitoring-table">
+
+        <tr>
+           </th><th>Адрес</th><th>Длина</th><th>Ширина</th><th class="table-btn"><a href="/room/add/">Добавить</a></th>
+        </tr>
+        {% for room in rooms %}
+        <tr>
+            <td>{{ room.adress }}</td><td>{{ room.length }} м</td><td>{{ room.width }} м</td>
+
+            <td class="table-btn"><a href="/room/edit/{{ room.id }}">Изменить</a><br/><span style="cursor:hand; text-decoration: underline; color: blue" onclick="alert('/room/delete/{{ room.id }}')">Удалить</span></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+			
+{% endblock %}

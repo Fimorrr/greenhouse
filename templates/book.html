@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="monitoring">
+    <div class="monitoring-navigate">
+        <div class="row">
+            <div class="book-navigate-element-empty"></div>
+            <div class="monitoring-navigate-element">
+                <a href="/book/plant/"{% if action == 'plant' %}style="color:#2D3C7A; font-weight: bold"{% endif %}>Растения</a>
+            </div>
+            <div class="monitoring-navigate-element">
+                <a href="/book/phase/"{% if action == 'phase' %}style="color:#2D3C7A; font-weight: bold"{% endif %}>Стадии</a>
+            </div>
+            <div class="book-navigate-element-empty"></div>
+        </div>
+    </div>
+
+    <table class="monitoring-table">
+        {% if action == 'plant' %}
+        <tr>
+            <th>Название</th><th>Тип растения</th><th>Необходимая площадь, м<sup>2</sup></th><th class="table-btn"><a href="/plant/add/">Добавить</a></th>
+        </tr>
+        {% for plant in plants %}
+        <tr>
+            <td>{{ plant.name }}</td><td>{{ plant.type.name }}</td><td>{{ plant.square }}</td>
+
+            <td class="table-btn"><a href="/plant/edit/{{ plant.id }}">Изменить</a><br/><span style="cursor:hand; text-decoration: underline; color: blue" onclick="alert('/plant/delete/{{ plant.id }}')">Удалить</span></td>
+        </tr>
+        {% endfor %}
+        {% elif action == 'phase' %}
+        <tr>
+            <th style="width:18%">Название стадии</th><th style="width:18%">Растение</th><th style="width:18%">Необходимая температура (°С)</th><th style="width:18%">Дневная норма освещения (ватт)</th><th style="width:18%">Дневная норма полива (л)</th>
+
+            <th class="table-btn"><a href="/phase/add/">Добавить</a></th>
+        </tr>
+        {% for phase in phases %}
+        <tr>
+            <td style="width:18%">{{ phase.name }}</td><td style="width:18%">{{ phase.plant.name }}</td><td style="width:18%">{{ phase.heat }}</td><td style="width:18%">{{ phase.light }}</td><td style="width:18%">{{ phase.water }}</td>
+
+            <td class="table-btn"><a href="/phase/edit/{{ phase.id }}">Изменить</a><br/><span style="cursor:hand; text-decoration: underline; color: blue" onclick="alert('/phase/delete/{{ phase.id }}')">Удалить</span></td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+
+    </table>
+
+</div>
+
+{% endblock %}

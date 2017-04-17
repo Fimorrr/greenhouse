@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="monitoring">
+
+    <div class="monitoring-navigate">
+        <div class="row">
+            <div class="sev-navigate-element-empty"></div>
+            <div class="sev-navigate-element">
+                <a href="/sev/">Планирование севооборота</a>
+            </div>
+            <div class="sev-navigate-element">
+                <a href="/comp/">Проверка совместимости растений</a>
+            </div>
+            <div class="sev-navigate-element-empty"></div>
+        </div>
+    </div>
+
+    <table class="group-table">
+
+        <tr>
+            <th>Номер группы</th><th>Растение</th><th>Количество растений</th><th>Стадии</th><th>Дата посадки</th><th>Дата сбора</th><th>Помещение</th><th class="table-btn"><a href="/group/add/">Добавить</a></th>
+        </tr>
+        {% for group in groups %}
+        <tr>
+            <td>{{ group.id }}</td><td>{{ group.plant.name }}</td><td>{{ group.count }}</td><td><a href="/entry/{{ group.id }}/">Список</a></td><td>{{ group.date }}</td><td>{{ group.date_end|default_if_none:"Отсутcтвует" }}</td><td>{{ group.room.adress }}</td>
+
+            <td class="table-btn"><a href="/group/edit/{{ group.id }}">Изменить</a><br/><span style="cursor:hand; text-decoration: underline; color: blue" onclick="alert('/group/delete/{{ group.id }}')">Удалить</span></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+			
+{% endblock %}

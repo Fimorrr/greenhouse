@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="monitoring">
+
+    <div class="monitoring-navigate">
+        <div class="row">
+            <div class="entry-name-empty"></div>
+            <div class="entry-name">
+                <a href="/group/">Назад</a>
+            </div>
+            <div class="entry-name-empty"></div>
+        </div>
+        <form class="search-form" action="/{{ action }}" method="get">
+                Выберите растение: {{ form.plant }} <input type="submit" value="Показать"/>
+		</form>
+    </div>
+
+    {% if sev != '' %}
+        <div style="padding-left: 30px" class="text">{{ sev }}</div>
+    {% endif %}
+
+</div>
+			
+{% endblock %}

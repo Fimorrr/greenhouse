@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <div style="display: table; width: 100%; text-align: center; padding: 10px 0px">
+        <div style="display: table-cell; width: 10%"></div>
+        <div style="display: table-cell; text-align: center;">
+            <form style="text-align: center;" action="" method="POST"> {% csrf_token %}
+                <div class="errortext">{{ error }}</div>
+                <table style="border-spacing: 10px">
+                    {{ form }}
+
+                    <tr><td></td><td style="text-align: right">{% if action == 'add' %}<input type="submit" value="Добавить">{% elif action == 'edit' %}<input type="submit" value="Изменить">{% endif %}</td></tr>
+                </table>
+            </form>
+        </div>
+    </div>
+{% endblock %}

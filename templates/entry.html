@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="monitoring">
+
+    <div class="monitoring-navigate">
+        <div class="row">
+            <div class="entry-name-empty"></div>
+            <div class="entry-name">
+                Группа: {{ group.id }}, {{ group.plant.name }}
+            </div>
+            <div class="entry-name-empty"></div>
+        </div>
+    </div>
+
+    <table class="monitoring-table">
+
+        <tr>
+            </th><th>Стадия</th><th>Дата начала</th><th>Дата конца</th>
+            <th class="table-btn"><a href="/entry/add/{{ group.id }}/">Добавить</a></th>
+        </tr>
+        {% for entry in entries %}
+        <tr>
+            <td>{{ entry.phase.name }}</td><td>{{ entry.date_start }}</td><td>{{ entry.date_end|default_if_none:"Отсутствует" }}</td>
+
+            <td class="table-btn"><a href="/entry/edit/{{ group.id }}/{{ entry.id }}">Изменить</a><br/><span style="cursor:hand; text-decoration: underline; color: blue" onclick="alert('/entry/delete/{{ group.id }}/{{ entry.id }}')">Удалить</span></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+			
+{% endblock %}
